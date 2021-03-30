@@ -78,7 +78,7 @@ foreach ($order_posts as $order_post) {
     }
     else {
       $contragent['name'] = $name;
-      $contragent['user_id'] = $order->get_customer_id();
+      $contragent['user_id'] = hash('sha256', $name);
     }
 
     if (!empty($order_meta["_{$type}_country"])) {
