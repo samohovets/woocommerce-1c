@@ -119,6 +119,7 @@ foreach ($order_posts as $order_post) {
       'quantity' => $order_line_item['qty'],
       'total' => $order_line_item['line_total'],
       'type' => "Товар",
+      'id' => $order_line_item['variation_id'] ? $order_line_item['variation_id'] : $order_line_item['product_id']
     );
   }
 
@@ -132,6 +133,7 @@ foreach ($order_posts as $order_post) {
       'quantity' => 1,
       'total' => $order_shipping_item['cost'],
       'type' => "Услуга",
+      'id' => $order_shipping_item['method_id']
     );
   }
 
@@ -240,8 +242,8 @@ echo '<?xml version="1.0" encoding="' . WC1C_XML_CHARSET . '"?>';
       <Товары>
         <?php foreach ($document['products'] as $product): ?>
           <Товар>
-            <?php if (!empty($product['guid'])): ?>
-              <Ид><?php echo $product['guid'] ?></Ид>
+            <?php if (!empty($product['id'])): ?>
+              <Ид><?php echo $product['id'] ?></Ид>
             <?php endif ?>
             <Наименование><?php echo $product['name'] ?></Наименование>
             <БазоваяЕдиница Код="796" НаименованиеПолное="Штука" МеждународноеСокращение="PCE">шт</БазоваяЕдиница>
